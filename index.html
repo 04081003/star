@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <style>
+    canvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <h1>이것은 내 그림</h1>
+  <canvas id="myCanvas" width="400" height="400"></canvas>
+  <script>
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Function to draw a swirl
+    function drawSwirl(centerX, centerY, radius, numLoops) {
+      ctx.beginPath();
+      for (let i = 0; i <= numLoops * 2 * Math.PI; i += 0.1) {
+        const x = centerX + (radius + i) * Math.cos(i);
+        const y = centerY + (radius + i) * Math.sin(i);
+        ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = 'rgba(0, 0, 255, 0.5)';
+      ctx.stroke();
+      ctx.closePath();
+    }
+
+    // Function to draw a circular pattern
+    function drawCircularPattern(centerX, centerY, innerRadius, outerRadius, numCircles) {
+      for (let i = 0; i < numCircles; i++) {
+        const angle = (i / numCircles) * 2 * Math.PI;
+        const x = centerX + outerRadius * Math.cos(angle);
+        const y = centerY + outerRadius * Math.sin(angle);
+        ctx.beginPath();
+        ctx.arc(x, y, innerRadius, 0, 2 * Math.PI);
+        ctx.fillStyle = 'rgba(255, 255, 0, 0.5)';
+        ctx.fill();
+        ctx.closePath();
+      }
+    }
+
+    // Draw swirls
+    drawSwirl(200, 200, 10, 10);
+    drawSwirl(300, 100, 5, 8);
+    drawSwirl(100, 300, 15, 6);
+
+    // Draw circular patterns
+    drawCircularPattern(200, 200, 5, 50, 12);
+    drawCircularPattern(300, 100, 8, 30, 8);
+    drawCircularPattern(100, 300, 10, 40, 10);
+
+  </script>
+</body>
+</html>
